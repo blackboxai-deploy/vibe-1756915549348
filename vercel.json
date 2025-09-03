@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "name": "hyper-video-saas",
+  "alias": ["hypervideo"],
+  "regions": ["sin1"],
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["prisma/**"]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "src/app/api/**": {
+      "maxDuration": 300
+    }
+  },
+  "crons": []
+}
